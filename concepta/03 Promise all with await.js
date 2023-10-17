@@ -31,7 +31,7 @@ const preMovie = async () => {
   });
   let [ticket,popcorn,butter,drink]=await Promise.all([getTicket,getPopcorn,getbutter,getColdDrinks]);
   console.log(`${popcorn},${butter},${drink}`)
-  return `${ticket}`;
+  return `${ticket},${drink}`;
 };
 preMovie().then((m) => console.log(`person3 shows the ${m}`));
 console.log("Person3:shows ticket");
