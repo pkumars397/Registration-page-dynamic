@@ -16,16 +16,26 @@ let form = document.getElementById("form");
 
   // Display user details on page load
     document.addEventListener("DOMContentLoaded", () => {
-      const userList = document.getElementById("List");
-      const keys = Object.keys(localStorage);
-      keys.forEach((key) => {
-        try {
-          const userDetails = JSON.parse(localStorage.getItem(key));
-          showuser(userDetails);
-        } catch (error) {
-          console.error("Error parsing JSON:", error);
-        }
-      });
+    const data=axios.get("https://crudcrud.com/api/fbba571e5d71497db5a5495cc9315517/AppointData")
+     .then(((res)=>{
+       let userData=res.data;
+       userData.forEach((d)=>{
+        showuser(d)
+       })
+     }))
+     .catch(err=>console.log(err));
+   
+     //  console.log(data)
+
+      // const keys = Object.keys(localStorage);
+      // keys.forEach((key) => {
+      //   try {
+      //     const userDetails = JSON.parse(localStorage.getItem(key));
+      //     showuser(userDetails);
+      //   } catch (error) {
+      //     console.error("Error parsing JSON:", error);
+      //   }
+      // });
      
     });
 
@@ -39,7 +49,7 @@ form.addEventListener("submit", (event) => {
     }
   // let details_stringfy = JSON.stringify(details);
   // localStorage.setItem(event.target.emailId.value, details_stringfy);
-    axios.post("https://crudcrud.com/api/78d8938bc43648aaabdf7ca152868363/AppointData",details)
+    axios.post("https://crudcrud.com/api/fbba571e5d71497db5a5495cc9315517/AppointData",details)
     .then((res)=>showuser(res.data))
     .catch((err)=>console.log(err))
     // showuser(details);
