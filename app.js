@@ -88,19 +88,8 @@ function showuser(obj) {
     document.getElementById("fN").value = obj.Name;
     document.getElementById("emailId").value = obj.Email;
     document.getElementById("phone").value = obj.Phone;
-      axios.delete(
-        `https://crudcrud.com/api/a825e987c3bc47089846873ea9bc1c67/AppointData/${obj._id}`
-      );
-    let details = {
-      Name: event.target.fullName.value,
-      Email: event.target.emailId.value,
-      Phone: event.target.phone.value,
-      Time: event.target.date.value + " " + event.target.time.value,
-    };
-    axios.put(
-      `https://crudcrud.com/api/a825e987c3bc47089846873ea9bc1c67/AppointData/${obj._id}`,
-      details
-    );
+    axios.delete(
+      `https://crudcrud.com/api/a825e987c3bc47089846873ea9bc1c67/AppointData/${obj._id}`);
   });
   childelement.appendChild(delButton);
   childelement.appendChild(editButton);
