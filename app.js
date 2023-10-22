@@ -18,7 +18,7 @@ let form = document.getElementById("form");
 document.addEventListener("DOMContentLoaded", () => {
   const data = axios
     .get(
-      "https://crudcrud.com/api/d339ddb7949c4b72a36e2c602b82de01/AppointData"
+      "https://crudcrud.com/api/1883d8e1168448e484d196da9c7f7001/AppointData"
     )
     .then((res) => {
       let userData = res.data;
@@ -53,7 +53,7 @@ form.addEventListener("submit", (event) => {
   // localStorage.setItem(event.target.emailId.value, details_stringfy);
   axios
     .post(
-      "https://crudcrud.com/api/d339ddb7949c4b72a36e2c602b82de01/AppointData",
+      "https://crudcrud.com/api/1883d8e1168448e484d196da9c7f7001/AppointData",
       details
     )
     .then((res) => showuser(res.data))
@@ -76,18 +76,28 @@ function showuser(obj) {
   // onclick event on delButton
   delButton.onclick = () => {
     axios.delete(
-      `https://crudcrud.com/api/d339ddb7949c4b72a36e2c602b82de01/AppointData/${obj._id}`
-    )
+      `https://crudcrud.com/api/1883d8e1168448e484d196da9c7f7001/AppointData/${obj._id}`
+    );
     // localStorage.removeItem(obj.Email);
     parentElement.removeChild(childelement);
   };
   // onclick on editButton
   editButton.addEventListener("click", () => {
-    localStorage.removeItem(obj.Email);
+    // localStorage.removeItem(obj.Email);
     parentElement.removeChild(childelement);
     document.getElementById("fN").value = obj.Name;
     document.getElementById("emailId").value = obj.Email;
     document.getElementById("phone").value = obj.Phone;
+      axios.delete(
+        `https://crudcrud.com/api/1883d8e1168448e484d196da9c7f7001/AppointData/${obj._id}`
+      );
+    let details = {
+      Name: event.target.fullName.value,
+      Email: event.target.emailId.value,
+      Phone: event.target.phone.value,
+      Time: event.target.date.value + " " + event.target.time.value,
+    };
+    axios.put(`https://crudcrud.com/api/1883d8e1168448e484d196da9c7f7001/AppointData/${obj._id}`,details)
   });
   childelement.appendChild(delButton);
   childelement.appendChild(editButton);
